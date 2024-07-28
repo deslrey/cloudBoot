@@ -1,5 +1,6 @@
 package org.deslre.mapper;
 
+
 import org.apache.ibatis.annotations.Mapper;
 import org.deslre.entity.po.FileInfo;
 import org.apache.ibatis.annotations.Param;
@@ -13,6 +14,7 @@ import java.util.List;
  * Date: 2024-07-28 19:40
  * Version: 1.0
  */
+@Mapper
 public interface FileInfoMapper extends BaseDao<FileInfo> {
 
     Long selectUseSpace(@Param("userId") String userId);

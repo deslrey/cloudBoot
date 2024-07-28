@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.deslre.config.AppConfig;
 import org.deslre.convert.EmailCodeConvert;
-import org.deslre.entity.dto.SysSettingDto;
 import org.deslre.entity.po.EmailCode;
 import org.deslre.entity.po.UserInfo;
 import org.deslre.entity.vo.EmailCodeVO;
@@ -19,8 +18,6 @@ import org.deslre.utils.RedisComponent;
 import org.deslre.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,9 +43,6 @@ public class EmailCodeServiceImpl extends BaseServiceImpl<EmailCodeMapper, Email
 
     @Resource
     private EmailCodeMapper emailCodeMapper;
-
-    @Resource
-    private JavaMailSender javaMailSender;
 
     @Resource
     private AppConfig appConfig;
