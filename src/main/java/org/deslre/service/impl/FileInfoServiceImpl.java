@@ -1,5 +1,6 @@
 package org.deslre.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.deslre.config.AppConfig;
@@ -79,7 +80,8 @@ public class FileInfoServiceImpl extends BaseServiceImpl<FileInfoMapper, FileInf
 
     private QueryWrapper<FileInfo> getWrapper(FileInfoQuery query) {
         QueryWrapper<FileInfo> wrapper = new QueryWrapper<>();
-        wrapper.eq(StringUtil.isNotEmpty(query.getUserId()), "user_id", query.getUserId());
+        String userId = query.getUserId();
+        wrapper.eq(StringUtil.isNotEmpty(query.getUserId()), "user_id", userId);
         wrapper.eq(StringUtil.isNotEmpty(query.getFileId()), "file_id", query.getFileId());
         wrapper.eq(StringUtil.isNotEmpty(query.getFilePid()), "file_pid", query.getFilePid());
         wrapper.eq(StringUtil.isNotEmpty(query.getFileName()), "file_name", query.getFileName());
@@ -231,11 +233,11 @@ public class FileInfoServiceImpl extends BaseServiceImpl<FileInfoMapper, FileInf
 
         } catch (DeslreException e) {
 //            e.printStackTrace();
-        logger.error("文件上传失败", e);
+            logger.error("文件上传失败", e);
             uploadSuccess = false;
             throw e;
         } catch (Exception e) {
-        logger.error("文件上传失败", e);
+            logger.error("文件上传失败", e);
 //            e.printStackTrace();
             uploadSuccess = false;
         } finally {
@@ -251,7 +253,6 @@ public class FileInfoServiceImpl extends BaseServiceImpl<FileInfoMapper, FileInf
     }
 
 
-
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void removeFile2RecycleBatch(String userId, String fileIds) {
@@ -260,7 +261,8 @@ public class FileInfoServiceImpl extends BaseServiceImpl<FileInfoMapper, FileInf
         query.setFileIdArray(fileIdArray);
         query.setUserId(userId);
         query.setDelFlag(FileDelFlagEnums.USING.getFlag());
-        List<FileInfo> fileInfoList = this.list(query);
+//        List<FileInfo> fileInfoList = this.list(query);
+        List<FileInfo> fileInfoList = this.list(new LambdaQueryWrapper<FileInfo>().eq(FileInfo::getUserId, userId));
         if (fileInfoList.isEmpty()) {
             return;
         }
@@ -599,7 +601,6 @@ public class FileInfoServiceImpl extends BaseServiceImpl<FileInfoMapper, FileInf
 
     /**
      * 文件转码
-
      */
     @Async
     public void transferFile(String fileId, SessionWebUserDto webUserDto) {
@@ -688,7 +689,6 @@ public class FileInfoServiceImpl extends BaseServiceImpl<FileInfoMapper, FileInf
 
     /**
      * 文件合并
-
      */
     private void union(String dirPath, String toFilePath, String fileName, boolean delSource) {
         File dir = new File(dirPath);
