@@ -1,5 +1,8 @@
 package org.deslre.controller;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * ClassName: RelationshipsController
  * Description: TODO
@@ -7,5 +10,7 @@ package org.deslre.controller;
  * Date: 2024-08-01 23:23
  * Version: 1.0
  */
-public class RelationshipsController {
+@RestController
+@RequestMapping("relationships")
+public class RelationshipsController extends BaseController {
 }
