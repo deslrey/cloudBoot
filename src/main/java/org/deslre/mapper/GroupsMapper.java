@@ -1,7 +1,6 @@
 package org.deslre.mapper;
 
 import org.deslre.entity.po.Groups;
-import org.mapstruct.Mapper;
 
 /**
  * ClassName: GroupsMapper

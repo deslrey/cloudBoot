@@ -1,6 +1,7 @@
 package org.deslre.utils;
 
 import org.deslre.entity.enums.VerifyRegexEnum;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

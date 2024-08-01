@@ -4,14 +4,13 @@ import org.deslre.annotation.GlobalInterceptor;
 import org.deslre.annotation.VerifyParam;
 import org.deslre.convert.EmailCodeConvert;
 import org.deslre.entity.po.EmailCode;
+import org.deslre.entity.vo.EmailCodeVO;
 import org.deslre.exception.DeslreException;
 import org.deslre.page.PageResult;
 import org.deslre.query.EmailCodeQuery;
 import org.deslre.result.Constants;
 import org.deslre.result.Results;
 import org.deslre.service.EmailCodeService;
-import org.deslre.entity.vo.EmailCodeVO;
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

@@ -13,5 +13,5 @@ import org.springframework.stereotype.Service;
  * Version: 1.0
  */
 @Service
-public class EntitiesServiceImpl extends BaseServiceImpl<EntitiesMapper,Entities> implements EntitiesService {
+public class EntitiesServiceImpl extends BaseServiceImpl<EntitiesMapper, Entities> implements EntitiesService {
 }

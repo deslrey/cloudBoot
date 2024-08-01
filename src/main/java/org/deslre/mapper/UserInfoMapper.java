@@ -1,7 +1,7 @@
 package org.deslre.mapper;
 
-import org.deslre.entity.po.UserInfo;
 import org.apache.ibatis.annotations.Param;
+import org.deslre.entity.po.UserInfo;
 
 /**
  * ClassName: UserInfoMapper

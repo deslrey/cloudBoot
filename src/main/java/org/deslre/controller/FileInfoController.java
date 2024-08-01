@@ -1,5 +1,6 @@
 package org.deslre.controller;
 
+import lombok.AllArgsConstructor;
 import org.deslre.annotation.GlobalInterceptor;
 import org.deslre.annotation.VerifyParam;
 import org.deslre.convert.FileInfoConvert;
@@ -12,10 +13,9 @@ import org.deslre.entity.po.FileInfo;
 import org.deslre.entity.vo.FileInfoVO;
 import org.deslre.page.PageResult;
 import org.deslre.query.FileInfoQuery;
-import org.deslre.service.FileInfoService;
 import org.deslre.result.Results;
+import org.deslre.service.FileInfoService;
 import org.deslre.utils.StringUtil;
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

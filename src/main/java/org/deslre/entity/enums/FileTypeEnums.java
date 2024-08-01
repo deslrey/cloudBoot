@@ -1,7 +1,7 @@
 package org.deslre.entity.enums;
 
-import org.apache.commons.lang3.ArrayUtils;
 import lombok.Getter;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * ClassName: FileTypeEnums

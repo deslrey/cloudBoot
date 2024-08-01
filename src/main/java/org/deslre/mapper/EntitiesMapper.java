@@ -1,6 +1,5 @@
 package org.deslre.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.deslre.entity.po.Entities;
 
 /**

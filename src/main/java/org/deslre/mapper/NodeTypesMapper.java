@@ -1,7 +1,6 @@
 package org.deslre.mapper;
 
 import org.deslre.entity.po.NodeTypes;
-import org.mapstruct.Mapper;
 
 /**
  * ClassName: NodeTypesMapper

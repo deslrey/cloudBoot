@@ -1,12 +1,12 @@
 package org.deslre.service;
 
-import java.util.List;
-
 import org.deslre.entity.dto.SessionWebUserDto;
 import org.deslre.entity.po.UserInfo;
 import org.deslre.entity.vo.UserInfoVO;
 import org.deslre.page.PageResult;
 import org.deslre.query.UserInfoQuery;
+
+import java.util.List;
 
 /**
  * ClassName: UserInfoService
