@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.deslre.entity.so.mapper.RelationshipsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="org.deslre.entity.po.Relationships">
+        <id column="id" property="id" />
+        <result column="start_id" property="startId" />
+        <result column="start_type" property="startType" />
+        <result column="end_id" property="endId" />
+        <result column="end_type" property="endType" />
+        <result column="group_id" property="groupId" />
+        <result column="information" property="information" />
+        <result column="exist" property="exist" />
+    </resultMap>
+
+</mapper>

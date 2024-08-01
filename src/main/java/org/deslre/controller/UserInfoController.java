@@ -165,8 +165,6 @@ public class UserInfoController extends BaseController {
 
     /**
      * 获取用户头像
-     *
-     * @return void
      */
     @RequestMapping("/getAvatar/{userId}")
     @GlobalInterceptor(checkParams = true, checkLogin = false)
