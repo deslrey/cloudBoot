@@ -31,5 +31,7 @@ public class NodeTypes implements Serializable {
 
     private String typeName;
 
+    private Boolean exist;
+
 
 }

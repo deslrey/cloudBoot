@@ -37,4 +37,5 @@ public class GroupMembers implements Serializable {
 
     private String role;
 
+    private Boolean exist;
 }

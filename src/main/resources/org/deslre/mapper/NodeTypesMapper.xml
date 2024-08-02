@@ -6,6 +6,7 @@
     <resultMap id="BaseResultMap" type="org.deslre.entity.po.NodeTypes">
         <id column="id" property="id" />
         <result column="type_name" property="typeName" />
+        <result column="exist" property="exist" />
     </resultMap>
 
 </mapper>

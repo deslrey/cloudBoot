@@ -9,6 +9,7 @@
         <result column="node_id" property="nodeId" />
         <result column="node_type" property="nodeType" />
         <result column="role" property="role" />
+        <result column="exist" property="exist" />
     </resultMap>
 
 </mapper>

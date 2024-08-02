@@ -1,6 +1,9 @@
 package org.deslre.service;
 
 import org.deslre.entity.po.Groups;
+import org.deslre.result.Results;
+
+import java.util.List;
 
 /**
  * ClassName: GroupsService
@@ -10,4 +13,5 @@ import org.deslre.entity.po.Groups;
  * Version: 1.0
  */
 public interface GroupsService extends BaseService<Groups>{
+    Results<List<Groups>> getAllGroups();
 }

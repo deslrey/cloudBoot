@@ -33,5 +33,7 @@ public class Groups implements Serializable {
 
     private String description;
 
+    private Boolean exist;
+
 
 }

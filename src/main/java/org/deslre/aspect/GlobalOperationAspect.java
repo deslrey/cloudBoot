@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.util.Objects;
 
 /**
  * ClassName: GlobalOperationAspect
@@ -81,7 +82,7 @@ public class GlobalOperationAspect {
     }
 
     private void checkLogin(Boolean checkAdmin) {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         HttpSession session = request.getSession();
 
         SessionWebUserDto userDto = (SessionWebUserDto) session.getAttribute(Constants.SESSION_KEY);

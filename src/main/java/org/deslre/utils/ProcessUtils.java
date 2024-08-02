@@ -20,7 +20,7 @@ public class ProcessUtils {
 
     private static final Logger log = LoggerFactory.getLogger(ProcessUtils.class);
 
-    public static String executeCommand(String cmd, Boolean outprintLog) throws DeslreException {
+    public static String executeCommand(String cmd, Boolean outpointLog) throws DeslreException {
         if (StringUtil.isEmpty(cmd)) {
             log.error("--- 指令执行失败，因为要执行的FFmpeg指令为空！ ---");
             return null;
@@ -43,7 +43,7 @@ public class ProcessUtils {
             String result = errorStream.stringBuffer.append(inputStream.stringBuffer).append("\n").toString();
             // 输出执行的命令信息
 
-            if (outprintLog) {
+            if (outpointLog) {
                 log.info("执行命令:{}，已执行完毕,执行结果:{}", cmd, result);
             } else {
                 log.info("执行命令:{}，已执行完毕", cmd);

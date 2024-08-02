@@ -1,7 +1,15 @@
 package org.deslre.controller;
 
+import org.deslre.entity.po.Groups;
+import org.deslre.result.Results;
+import org.deslre.service.GroupsService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * ClassName: GroupsController
@@ -13,4 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("groups")
 public class GroupsController extends BaseController {
+
+    @Resource
+    private GroupsService groupsService;
+
+    @GetMapping("getAllGroups")
+    public Results<List<Groups>> getAllGroups(HttpSession session) {
+        return groupsService.getAllGroups();
+    }
+
 }
