@@ -1,7 +1,13 @@
 package org.deslre.convert;
 
+import org.deslre.entity.po.GroupMembers;
+import org.deslre.entity.po.Groups;
+import org.deslre.entity.vo.GroupMembersVO;
+import org.deslre.entity.vo.GroupsVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 /**
  * ClassName: GroupsConvert
@@ -15,4 +21,9 @@ public interface GroupsConvert {
 
     GroupsConvert INSTANCE = Mappers.getMapper(GroupsConvert.class);
 
+    Groups convert(GroupsVO vo);
+
+    GroupsVO convert(Groups entity);
+
+    List<GroupsVO> convertList(List<Groups> list);
 }
