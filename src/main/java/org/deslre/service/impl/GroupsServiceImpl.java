@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class GroupsServiceImpl extends BaseServiceImpl<GroupsMapper, Groups> implements GroupsService {
     @Override
-    public Results< List<Groups>> getAllGroups() {
+    public Results<List<Groups>> getAllGroups() {
         QueryWrapper<Groups> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("exist", true);
         List<Groups> groups = list(queryWrapper);

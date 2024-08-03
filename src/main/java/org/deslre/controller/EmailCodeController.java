@@ -73,7 +73,6 @@ public class EmailCodeController {
     }
 
     @PutMapping
-
     public Results<String> update(@RequestBody @Valid EmailCodeVO vo){
         emailCodeService.update(vo);
 

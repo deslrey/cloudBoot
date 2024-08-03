@@ -211,7 +211,7 @@ public class UserInfoController extends BaseController {
 
         // 同时将数据库中qq头像设为空
         UserInfo userInfo = userInfoService.getById(webUserDto.getUserId());
-        userInfo.setQqAvatar("");
+        userInfo.setAvatar("");
         userInfoService.updateById(userInfo);
         webUserDto.setAvatar(null);
         //更新session

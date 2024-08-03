@@ -29,11 +29,8 @@ public class UserInfoVO implements Serializable {
     //	@Schema(description = "用户邮箱")
     private String email;
 
-    //	@Schema(description = "qqOpenID")
-    private Integer qqOpenId;
-
-    //	@Schema(description = "qq头像")
-    private String qqAvatar;
+    //	@Schema(description = "头像")
+    private String avatar;
 
     //	@Schema(description = "用户密码")
     private String password;

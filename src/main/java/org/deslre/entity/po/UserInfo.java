@@ -39,7 +39,7 @@ public class UserInfo {
     /**
      * qq头像
      */
-    private String qqAvatar;
+    private String avatar;
 
     /**
      * 用户密码

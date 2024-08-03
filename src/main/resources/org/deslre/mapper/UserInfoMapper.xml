@@ -7,8 +7,7 @@
         <result property="userId" column="user_id"/>
         <result property="nickName" column="nick_name"/>
         <result property="email" column="email"/>
-        <result property="qqOpenId" column="qq_open_id"/>
-        <result property="qqAvatar" column="qq_avatar"/>
+        <result property="avatar" column="avatar"/>
         <result property="password" column="password"/>
         <result property="joinTime" column="join_time"/>
         <result property="lastLoginTime" column="last_login_time"/>
