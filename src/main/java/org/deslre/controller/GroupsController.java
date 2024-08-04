@@ -1,14 +1,17 @@
 package org.deslre.controller;
 
-import org.deslre.entity.po.Groups;
+import org.deslre.annotation.VerifyParam;
+import org.deslre.entity.vo.GroupsVO;
+import org.deslre.page.PageResult;
+import org.deslre.query.FileInfoQuery;
+import org.deslre.query.GroupsQuery;
 import org.deslre.result.Results;
 import org.deslre.service.GroupsService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -25,9 +28,14 @@ public class GroupsController extends BaseController {
     @Resource
     private GroupsService groupsService;
 
-    @GetMapping("getAllGroups")
-    public Results<List<Groups>> getAllGroups(HttpSession session) {
-        return groupsService.getAllGroups();
+    @PostMapping("getAllGroups")
+    public Results<PageResult<GroupsVO>> getAllGroups(@Valid GroupsQuery query) {
+        return groupsService.getAllGroups(query);
+    }
+
+    @PostMapping("deleteGroup")
+    public Results<Void> deleteGroup(@VerifyParam(required = true) @RequestParam("groupsId") Integer id) {
+        return groupsService.deleteGroup(id);
     }
 
 }

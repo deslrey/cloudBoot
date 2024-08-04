@@ -29,7 +29,8 @@ public class RedisComponent {
         SysSettingDto sysSettingDto = (SysSettingDto) redisUtils.get(Constants.REDIS_KEY_SYS_SETTING);
         if (sysSettingDto == null) {
             sysSettingDto = new SysSettingDto();
-            redisUtils.set(Constants.REDIS_KEY_SYS_SETTING, sysSettingDto);
+//            redisUtils.set(Constants.REDIS_KEY_SYS_SETTING, sysSettingDto);
+            redisUtils.setex(Constants.REDIS_KEY_SYS_SETTING, sysSettingDto, 15L);
         }
 
         return sysSettingDto;
@@ -65,7 +66,7 @@ public class RedisComponent {
 
     public Long getFileSizeFromRedis(String key) {
         Object sizeObj = redisUtils.get(key);
-        if (sizeObj == null){
+        if (sizeObj == null) {
             return 0L;
         }
         if (sizeObj instanceof Integer) {

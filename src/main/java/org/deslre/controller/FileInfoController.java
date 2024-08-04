@@ -62,13 +62,13 @@ public class FileInfoController extends BaseController {
     @RequestMapping("uploadFile")
     @GlobalInterceptor(checkParams = true)
     public Results<UploadResultDto> uploadFile(HttpSession session,
-                                              String fileId,
-                                              MultipartFile file,
-                                              @VerifyParam(required = true) String fileName,
-                                              @VerifyParam(required = true) String filePid,
-                                              @VerifyParam(required = true) String fileMd5,
-                                              @VerifyParam(required = true) Integer chunkIndex,
-                                              @VerifyParam(required = true) Integer chunks) {
+                                               String fileId,
+                                               MultipartFile file,
+                                               @VerifyParam(required = true) String fileName,
+                                               @VerifyParam(required = true) String filePid,
+                                               @VerifyParam(required = true) String fileMd5,
+                                               @VerifyParam(required = true) Integer chunkIndex,
+                                               @VerifyParam(required = true) Integer chunks) {
 
         SessionWebUserDto sessionWebUserDto = getUserInfoFromSession(session);
         UploadResultDto resultDto = fileInfoService.uploadFile(sessionWebUserDto, fileId, file, fileName, filePid, fileMd5, chunkIndex, chunks);
@@ -114,8 +114,8 @@ public class FileInfoController extends BaseController {
     @RequestMapping("newFolder")
     @GlobalInterceptor(checkParams = true)
     public Results<FileInfoVO> newFolder(HttpSession session,
-                                        @VerifyParam(required = true) String filePid,
-                                        @VerifyParam(required = true) String fileName) {
+                                         @VerifyParam(required = true) String filePid,
+                                         @VerifyParam(required = true) String fileName) {
         SessionWebUserDto webUserDto = getUserInfoFromSession(session);
         FileInfo fileInfo = fileInfoService.newFolder(filePid, webUserDto.getUserId(), fileName);
         return Results.ok(FileInfoConvert.INSTANCE.convert(fileInfo));
@@ -130,8 +130,8 @@ public class FileInfoController extends BaseController {
     @RequestMapping("rename")
     @GlobalInterceptor(checkParams = true)
     public Results<FileInfoVO> rename(HttpSession session,
-                                     @VerifyParam(required = true) String fileId,
-                                     @VerifyParam(required = true) String fileName) {
+                                      @VerifyParam(required = true) String fileId,
+                                      @VerifyParam(required = true) String fileName) {
         SessionWebUserDto userDto = getUserInfoFromSession(session);
         return Results.ok(fileInfoService.rename(fileId, getUserInfoFromSession(session).getUserId(), fileName));
     }
@@ -139,8 +139,8 @@ public class FileInfoController extends BaseController {
     @RequestMapping("loadAllFolder")
     @GlobalInterceptor(checkParams = true)
     public Results<List<FileInfoVO>> loadAllFolder(HttpSession session,
-                                                  @VerifyParam(required = true) String filePid,
-                                                  String currentFileIds) {
+                                                   @VerifyParam(required = true) String filePid,
+                                                   String currentFileIds) {
         SessionWebUserDto userDto = getUserInfoFromSession(session);
         FileInfoQuery query = new FileInfoQuery();
         query.setUserId(userDto.getUserId());
@@ -157,7 +157,7 @@ public class FileInfoController extends BaseController {
 
     @RequestMapping("changeFileFolder")
     @GlobalInterceptor(checkParams = true)
-    public Results<String> changeFileFolder (HttpSession session,
+    public Results<String> changeFileFolder(HttpSession session,
                                             @VerifyParam(required = true) String fileIds,
                                             @VerifyParam(required = true) String filePid) {
         fileInfoService.changeFileFolder(fileIds, filePid, getUserInfoFromSession(session).getUserId());
@@ -167,7 +167,7 @@ public class FileInfoController extends BaseController {
     @RequestMapping("/createDownloadUrl/{fileId}")
     @GlobalInterceptor(checkParams = true)
     public Results<String> createDownloadUrl(HttpSession session,
-                                            @PathVariable("fileId") @VerifyParam(required = true) String fileId) {
+                                             @PathVariable("fileId") @VerifyParam(required = true) String fileId) {
         return super.createDownloadUrl(fileId, getUserInfoFromSession(session).getUserId());
     }
 

@@ -116,7 +116,7 @@ public class GlobalOperationAspect {
     private void checkObjValue(Parameter parameter, Object value) {
         try {
             String typeName = parameter.getParameterizedType().getTypeName();
-            Class clazz = Class.forName(typeName);
+            Class<?> clazz = Class.forName(typeName);
             Field[] fields = clazz.getDeclaredFields();
             for (Field field : fields) {
                 VerifyParam fieldVerifyParam = field.getAnnotation(VerifyParam.class);

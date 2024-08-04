@@ -1,8 +1,6 @@
 package org.deslre.convert;
 
-import org.deslre.entity.po.GroupMembers;
 import org.deslre.entity.po.NodeTypes;
-import org.deslre.entity.vo.GroupMembersVO;
 import org.deslre.entity.vo.NodeTypesVO;
 import org.mapstruct.factory.Mappers;
 

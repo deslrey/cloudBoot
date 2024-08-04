@@ -1,7 +1,11 @@
 package org.deslre.query;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serial;
 
 /**
  * ClassName: GroupsQuery
@@ -13,4 +17,12 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class GroupsQuery extends Query {
+
+    private Integer id;
+
+    private String name;
+
+    private String description;
+
+    private Boolean exist;
 }
