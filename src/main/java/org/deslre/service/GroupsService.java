@@ -20,4 +20,6 @@ public interface GroupsService extends BaseService<Groups> {
     Results<PageResult<GroupsVO>> getAllGroups(GroupsQuery query);
 
     Results<Void> deleteGroup(Integer id);
+
+    Results<Void> updateGroup(GroupsVO groupsVO);
 }

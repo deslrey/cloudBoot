@@ -17,6 +17,7 @@ import org.deslre.result.Results;
 import org.deslre.service.GroupsService;
 import org.deslre.utils.StringUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -39,6 +40,7 @@ public class GroupsServiceImpl extends BaseServiceImpl<GroupsMapper, Groups> imp
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Results<Void> deleteGroup(Integer id) {
         if (id == null || id < 0) {
             throw new DeslreException(ResultCodeEnum.CODE_600);
@@ -46,11 +48,34 @@ public class GroupsServiceImpl extends BaseServiceImpl<GroupsMapper, Groups> imp
         Groups groups = getById(id);
         if (groups == null) {
             throw new DeslreException(ResultCodeEnum.CODE_600);
-
         }
         groups.setExist(false);
         updateById(groups);
         return Results.ok("删除成功");
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Results<Void> updateGroup(GroupsVO groupsVO) {
+        if (groupsVO == null) {
+            throw new DeslreException(ResultCodeEnum.CODE_600);
+        }
+        if (groupsVO.getId() == null || groupsVO.getId() < 0) {
+            throw new DeslreException(ResultCodeEnum.CODE_600);
+        }
+        if (StringUtil.isEmpty(groupsVO.getName()) || StringUtil.isEmpty(groupsVO.getDescription())) {
+            throw new DeslreException(ResultCodeEnum.CODE_600);
+        }
+
+        Groups groups = getById(groupsVO.getId());
+        if (groups == null) {
+            throw new DeslreException(ResultCodeEnum.CODE_600);
+        }
+
+        groups = GroupsConvert.INSTANCE.convert(groupsVO);
+        updateById(groups);
+
+        return Results.ok("更新成功");
     }
 
 

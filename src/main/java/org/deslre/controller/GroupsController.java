@@ -38,4 +38,9 @@ public class GroupsController extends BaseController {
         return groupsService.deleteGroup(id);
     }
 
+    @PostMapping("updateGroup")
+    public Results<Void> updateGroup(GroupsVO groupsVO) {
+        return groupsService.updateGroup(groupsVO);
+    }
+
 }
