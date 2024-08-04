@@ -22,4 +22,6 @@ public interface GroupsService extends BaseService<Groups> {
     Results<Void> deleteGroup(Integer id);
 
     Results<Void> updateGroup(GroupsVO groupsVO);
+
+    Results<List<GroupsVO>> getOptions(Integer count);
 }

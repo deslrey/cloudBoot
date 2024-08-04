@@ -43,4 +43,8 @@ public class GroupsController extends BaseController {
         return groupsService.updateGroup(groupsVO);
     }
 
+    @PostMapping("getOptions")
+    public Results<List<GroupsVO>> getOptions(@RequestParam("count") Integer count) {
+        return groupsService.getOptions(count);
+    }
 }

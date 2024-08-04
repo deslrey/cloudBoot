@@ -64,7 +64,7 @@ public class GroupsServiceImpl extends BaseServiceImpl<GroupsMapper, Groups> imp
             throw new DeslreException(ResultCodeEnum.CODE_600);
         }
         if (StringUtil.isEmpty(groupsVO.getName()) || StringUtil.isEmpty(groupsVO.getDescription())) {
-            throw new DeslreException(ResultCodeEnum.CODE_600);
+            throw new DeslreException(ResultCodeEnum.EMPTY_VALUE);
         }
 
         Groups groups = getById(groupsVO.getId());
@@ -76,6 +76,15 @@ public class GroupsServiceImpl extends BaseServiceImpl<GroupsMapper, Groups> imp
         updateById(groups);
 
         return Results.ok("更新成功");
+    }
+
+    @Override
+    public Results<List<GroupsVO>> getOptions(Integer count) {
+        QueryWrapper<Groups> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("id").last("LIMIT 100");
+        List<Groups> groupsList = list(queryWrapper);
+        List<GroupsVO> converted = GroupsConvert.INSTANCE.convertList(groupsList);
+        return Results.ok(converted);
     }
 
 
