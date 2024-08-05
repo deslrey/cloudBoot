@@ -13,5 +13,34 @@
         <result column="information" property="information" />
         <result column="exist" property="exist" />
     </resultMap>
+    <select id="findByGroupId" resultType="org.deslre.entity.vo.RelationshipsVO"
+            parameterType="java.lang.Integer">
+
+        SELECT r.id         AS relationshipId,
+               r.start_id   AS startId,
+               CASE
+                   WHEN r.start_type = 'person' THEN p1.name
+                   WHEN r.start_type = 'entity' THEN e1.name
+                   END      AS startName,
+               r.start_type AS startType,
+               r.information,
+               r.end_id     AS endId,
+               CASE
+                   WHEN r.end_type = 'person' THEN p2.name
+                   WHEN r.end_type = 'entity' THEN e2.name
+                   END      AS endName,
+               r.end_type   AS endType,
+               r.group_id   AS groupId,
+               r.exist
+        FROM relationships r
+                 LEFT JOIN persons p1 ON r.start_id = p1.id AND r.start_type = 'person' AND p1.exist = 1
+                 LEFT JOIN entities e1 ON r.start_id = e1.id AND r.start_type = 'entity' AND e1.exist = 1
+                 LEFT JOIN persons p2 ON r.end_id = p2.id AND r.end_type = 'person' AND p2.exist = 1
+                 LEFT JOIN entities e2 ON r.end_id = e2.id AND r.end_type = 'entity' AND e2.exist = 1
+                 JOIN groups g ON r.group_id = g.id AND g.exist = 1
+        WHERE r.group_id = #{groupId}
+          AND r.exist = 1
+
+    </select>
 
 </mapper>

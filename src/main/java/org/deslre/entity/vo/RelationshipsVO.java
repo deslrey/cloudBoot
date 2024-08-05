@@ -18,21 +18,24 @@ public class RelationshipsVO implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private Long relationshipId;
 
-    private Integer startId;
+    private Long startId;
+
+    private String startName;
 
     private String startType;
 
-    private Integer endId;
+    private String information;
+
+    private Long endId;
+
+    private String endName;
 
     private String endType;
 
-    private Integer groupId;
-
-    private String information;
+    private Long groupId;
 
     private Boolean exist;
-
 
 }
