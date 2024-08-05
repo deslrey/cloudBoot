@@ -1,7 +1,16 @@
 package org.deslre.controller;
 
+import org.deslre.annotation.VerifyParam;
+import org.deslre.entity.vo.RelationshipsVO;
+import org.deslre.result.Results;
+import org.deslre.service.RelationshipsService;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * ClassName: RelationshipsController
@@ -13,4 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("relationships")
 public class RelationshipsController extends BaseController {
+
+    @Resource
+    private RelationshipsService relationshipsService;
+
+    @PostMapping("getGroupRela")
+    public Results<List<RelationshipsVO>> getGroupRela(@VerifyParam(required = true) @RequestParam("groupId") Integer id) {
+        return relationshipsService.getGroupRela(id);
+    }
 }
