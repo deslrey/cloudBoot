@@ -27,8 +27,6 @@ public class PersonsController extends BaseController {
 
     @PostMapping("updatePerson")
     public Results<Void> updatePerson(PersonsVO personsVO, @RequestParam("groupsId") Integer groupId) {
-        System.out.println("personsVO = " + personsVO);
-        System.out.println("groupId = " + groupId);
         return personsService.updatePerson(personsVO,groupId);
     }
 

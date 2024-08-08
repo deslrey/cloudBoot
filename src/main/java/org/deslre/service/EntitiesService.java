@@ -1,6 +1,8 @@
 package org.deslre.service;
 
 import org.deslre.entity.po.Entities;
+import org.deslre.entity.vo.EntitiesVO;
+import org.deslre.result.Results;
 
 /**
  * ClassName: EntitiesService
@@ -10,4 +12,5 @@ import org.deslre.entity.po.Entities;
  * Version: 1.0
  */
 public interface EntitiesService extends BaseService<Entities>{
+    Results<Void> updateEntities(EntitiesVO entitiesVO, Integer groupId);
 }
