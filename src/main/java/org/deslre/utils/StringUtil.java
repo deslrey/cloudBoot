@@ -34,6 +34,14 @@ public class StringUtil extends StringUtils {
         } else return !str.trim().isEmpty();
     }
 
+    public static <T> boolean isNull(T clazz) {
+        return clazz == null;
+    }
+
+    public static <T> boolean isNotNull(T clazz) {
+        return !isNull(clazz);
+    }
+
     public static String encodeByMd5(String originalString) {
         return isEmpty(originalString) ? null : DigestUtils.md5Hex(originalString);
     }

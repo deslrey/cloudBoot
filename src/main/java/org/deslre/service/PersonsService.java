@@ -1,6 +1,8 @@
 package org.deslre.service;
 
 import org.deslre.entity.po.Persons;
+import org.deslre.entity.vo.PersonsVO;
+import org.deslre.result.Results;
 
 /**
  * ClassName: PersonsService
@@ -10,4 +12,5 @@ import org.deslre.entity.po.Persons;
  * Version: 1.0
  */
 public interface PersonsService extends BaseService<Persons>{
+    Results<Void> updatePerson(PersonsVO personsVO, Integer groupId);
 }
