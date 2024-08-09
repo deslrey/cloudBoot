@@ -1,7 +1,9 @@
 package org.deslre.convert;
 
 import org.deslre.entity.po.Entities;
+import org.deslre.entity.po.Persons;
 import org.deslre.entity.vo.EntitiesVO;
+import org.deslre.entity.vo.SingleNodeVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -20,6 +22,8 @@ public interface EntitiesConvert {
     EntitiesConvert INSTANCE = Mappers.getMapper(EntitiesConvert.class);
 
     Entities convert(EntitiesVO vo);
+
+    Entities convert(SingleNodeVO vo);
 
     EntitiesVO convert(Entities entity);
 
