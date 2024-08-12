@@ -36,8 +36,10 @@ public class GroupMembersServiceImpl extends BaseServiceImpl<GroupMembersMapper,
 
     @Override
     public Results<Void> updateNodeData(SingleNodeVO singleNode) {
-        if (StringUtil.isNull(singleNode) || StringUtil.isNull(singleNode.getId()) || StringUtil.isNull(singleNode.getGroupId()) || StringUtil.isEmpty(singleNode.getNodeType())) {
-            throw new DeslreException(ResultCodeEnum.CODE_600);
+        if (StringUtil.isNull(singleNode) || StringUtil.isNull(singleNode.getId())
+                || StringUtil.isNull(singleNode.getGroupId()) || StringUtil.isEmpty(singleNode.getNodeType())
+                || StringUtil.isEmpty(singleNode.getRole())) {
+            throw new DeslreException(ResultCodeEnum.EMPTY_VALUE);
         }
 
         if (singleNode.getId() <= 0 || singleNode.getGroupId() <= 0) {
@@ -55,6 +57,9 @@ public class GroupMembersServiceImpl extends BaseServiceImpl<GroupMembersMapper,
             throw new DeslreException(ResultCodeEnum.CODE_600);
         }
 
+        groupMembers.setRole(singleNode.getRole());
+        updateById(groupMembers);
+
         if (singleNode.getNodeType().equals("person")) {
             updatePerson(singleNode);
         } else if (singleNode.getNodeType().equals("entity")) {
@@ -62,7 +67,6 @@ public class GroupMembersServiceImpl extends BaseServiceImpl<GroupMembersMapper,
         } else {
             throw new DeslreException(ResultCodeEnum.CODE_600);
         }
-
 
         return Results.ok("更新完成");
     }
@@ -79,8 +83,6 @@ public class GroupMembersServiceImpl extends BaseServiceImpl<GroupMembersMapper,
             throw new DeslreException(ResultCodeEnum.CODE_600);
         }
         personsService.updateById(convert);
-
-        System.out.println("persons = " + convert);
     }
 
     private void updateEntities(SingleNodeVO singleNode) {
@@ -94,7 +96,5 @@ public class GroupMembersServiceImpl extends BaseServiceImpl<GroupMembersMapper,
         }
 
         entitiesService.updateById(convert);
-
-        System.out.println("entities = " + convert);
     }
 }

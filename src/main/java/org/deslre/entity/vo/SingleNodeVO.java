@@ -24,6 +24,8 @@ public class SingleNodeVO implements Serializable {
 
     private String nodeType;
 
+    private String role;
+
     private String name;
 
     private Integer age;
