@@ -18,7 +18,7 @@ public class RelationshipsVO implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private Long relationshipId;
+    private Long relationId;
 
     private Long startId;
 

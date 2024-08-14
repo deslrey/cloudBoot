@@ -4,6 +4,9 @@ import org.deslre.entity.po.GroupMembers;
 import org.deslre.entity.vo.SingleNodeVO;
 import org.deslre.result.Results;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * ClassName: GroupMembersService
  * Description: TODO
@@ -13,4 +16,6 @@ import org.deslre.result.Results;
  */
 public interface GroupMembersService extends BaseService<GroupMembers>{
     Results<Void> updateNodeData(SingleNodeVO singleNode);
+
+    Results<Map<String, List<SingleNodeVO>>> getAllData(Integer id);
 }

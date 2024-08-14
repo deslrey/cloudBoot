@@ -16,7 +16,7 @@
     <select id="findByGroupId" resultType="org.deslre.entity.vo.RelationshipsVO"
             parameterType="java.lang.Integer">
 
-        SELECT r.id         AS relationshipId,
+        SELECT r.id         AS relationId,
                r.start_id   AS startId,
                CASE
                    WHEN r.start_type = 'person' THEN p1.name
