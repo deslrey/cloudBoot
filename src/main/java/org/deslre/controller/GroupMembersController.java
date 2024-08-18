@@ -30,12 +30,12 @@ public class GroupMembersController extends BaseController {
     @PostMapping("updateNodeData")
     public Results<Void> updateNodeData(SingleNodeVO singleNode) {
         System.out.println("singleNode = " + singleNode);
-        return Results.ok("更新完成");
-//        return groupMembersService.updateNodeData(singleNode);
+//        return Results.ok("更新完成");
+        return groupMembersService.updateNodeData(singleNode);
     }
 
     @PostMapping("getAllData")
-    public Results<Map<String, List<SingleNodeVO>>> getAllData(@VerifyParam(required = true) @RequestParam("groupsId") Integer id) {
+    public Results<Map<String, List<SingleNodeVO>>> getAllData(@VerifyParam(required = true) @RequestParam("groupId") Integer id) {
         return groupMembersService.getAllData(id);
     }
 }

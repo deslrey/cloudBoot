@@ -23,6 +23,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.deslre.result.Constants.NODE_TYPE_ENTITY;
+import static org.deslre.result.Constants.NODE_TYPE_PERSON;
+
 /**
  * ClassName: GroupMembersServiceImpl
  * Description: TODO
@@ -40,9 +43,9 @@ public class GroupMembersServiceImpl extends BaseServiceImpl<GroupMembersMapper,
 
     @Override
     public Results<Void> updateNodeData(SingleNodeVO singleNode) {
+        String role = singleNode.getRole();
         if (StringUtil.isNull(singleNode) || StringUtil.isNull(singleNode.getId())
-                || StringUtil.isNull(singleNode.getGroupId()) || StringUtil.isEmpty(singleNode.getNodeType())
-                || StringUtil.isEmpty(singleNode.getRole())) {
+                || StringUtil.isNull(singleNode.getGroupId()) || StringUtil.isEmpty(singleNode.getNodeType())) {
             throw new DeslreException(ResultCodeEnum.EMPTY_VALUE);
         }
 
@@ -61,12 +64,14 @@ public class GroupMembersServiceImpl extends BaseServiceImpl<GroupMembersMapper,
             throw new DeslreException(ResultCodeEnum.CODE_600);
         }
 
-        groupMembers.setRole(singleNode.getRole());
-        updateById(groupMembers);
+        if (StringUtil.isNotEmpty(role)) {
+            groupMembers.setRole(role);
+            updateById(groupMembers);
+        }
 
-        if (singleNode.getNodeType().equals("person")) {
+        if (singleNode.getNodeType().equals(NODE_TYPE_PERSON)) {
             updatePerson(singleNode);
-        } else if (singleNode.getNodeType().equals("entity")) {
+        } else if (singleNode.getNodeType().equals(NODE_TYPE_ENTITY)) {
             updateEntities(singleNode);
         } else {
             throw new DeslreException(ResultCodeEnum.CODE_600);
@@ -95,9 +100,9 @@ public class GroupMembersServiceImpl extends BaseServiceImpl<GroupMembersMapper,
             String nodeType = groupMembers.getNodeType();
             if (StringUtil.isEmpty(nodeType))
                 continue;
-            if ("person".equals(nodeType)) {
+            if (NODE_TYPE_PERSON.equals(nodeType)) {
                 personListId.add(groupMembers.getNodeId());
-            } else if ("entity".equals(nodeType)) {
+            } else if (NODE_TYPE_ENTITY.equals(nodeType)) {
                 entityListId.add(groupMembers.getNodeId());
             }
         }
@@ -110,7 +115,7 @@ public class GroupMembersServiceImpl extends BaseServiceImpl<GroupMembersMapper,
                 if (persons.getExist()) {
                     singleNodeVO = new SingleNodeVO();
                     singleNodeVO.setId(persons.getId());
-                    singleNodeVO.setNodeType("person");
+                    singleNodeVO.setNodeType(NODE_TYPE_PERSON);
                     singleNodeVO.setName(persons.getName());
                     singleNodeVO.setAge(persons.getAge());
                     singleNodeVO.setGender(persons.getGender());
@@ -121,7 +126,7 @@ public class GroupMembersServiceImpl extends BaseServiceImpl<GroupMembersMapper,
                     nodeVOList.add(singleNodeVO);
                 }
             }
-            map.put("person", nodeVOList);
+            map.put(NODE_TYPE_PERSON, nodeVOList);
         }
 
 
@@ -132,14 +137,14 @@ public class GroupMembersServiceImpl extends BaseServiceImpl<GroupMembersMapper,
                 if (entities.getExist()) {
                     singleNodeVO = new SingleNodeVO();
                     singleNodeVO.setId(entities.getId());
-                    singleNodeVO.setNodeType("entities");
+                    singleNodeVO.setNodeType(NODE_TYPE_ENTITY);
                     singleNodeVO.setName(entities.getName());
                     singleNodeVO.setDescription(entities.getDescription());
                     singleNodeVO.setExist(true);
                     nodeVOList.add(singleNodeVO);
                 }
             }
-            map.put("entities", nodeVOList);
+            map.put(NODE_TYPE_ENTITY, nodeVOList);
         }
 
 
