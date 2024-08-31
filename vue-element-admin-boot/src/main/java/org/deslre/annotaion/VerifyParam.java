@@ -1,4 +1,4 @@
-package org.deslre.annotation;
+package org.deslre.annotaion;
 
 import org.deslre.entity.enums.VerifyRegexEnum;
 
