@@ -1,4 +1,4 @@
-package org.deslre.annotaion;
+package org.deslre.annotation;
 
 import org.springframework.web.bind.annotation.Mapping;
 
