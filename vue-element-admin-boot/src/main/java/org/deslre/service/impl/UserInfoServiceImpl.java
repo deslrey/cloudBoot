@@ -8,6 +8,7 @@ import org.deslre.entity.enums.UserStatusEnum;
 import org.deslre.entity.po.UserInfo;
 import org.deslre.exception.DeslreException;
 import org.deslre.mapper.UserInfoMapper;
+import org.deslre.result.Constants;
 import org.deslre.service.UserInfoService;
 import org.deslre.utils.StringUtil;
 import org.springframework.stereotype.Service;
@@ -30,9 +31,16 @@ public class UserInfoServiceImpl extends BaseServiceImpl<UserInfoMapper, UserInf
 
     @Override
     public SessionWebUserDto login(String email, String password) {
+
+        if (StringUtil.isEmpty(email) || StringUtil.isEmpty(password)) {
+            throw new DeslreException("账号或密码不能为空");
+        }
+
+        String newPassword = Constants.NEW_START_PASSWORD + password;
+
         UserInfo userInfo = this.getOne(new QueryWrapper<UserInfo>().eq("email", email));
 
-        if (userInfo == null || (StringUtil.isNotEmpty(userInfo.getPassword()) && !userInfo.getPassword().equals(password))) {
+        if (userInfo == null || (StringUtil.isNotEmpty(userInfo.getPassword()) && !userInfo.getPassword().equals(newPassword))) {
             throw new DeslreException("账号或密码错误");
         }
 

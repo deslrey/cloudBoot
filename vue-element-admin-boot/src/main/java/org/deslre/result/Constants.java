@@ -41,4 +41,6 @@ public class Constants {
     public static final String NODE_TYPE_PERSON = "person";
     public static final String NODE_TYPE_ENTITY = "entity";
 
+    public static final String NEW_START_PASSWORD = "deslre-";
+
 }
