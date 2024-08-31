@@ -1,5 +1,6 @@
 package org.deslre.service;
 
+import org.deslre.entity.dto.SessionWebUserDto;
 import org.deslre.entity.po.UserInfo;
 
 /**
@@ -10,4 +11,5 @@ import org.deslre.entity.po.UserInfo;
  * Version: 1.0
  */
 public interface UserInfoService extends BaseService<UserInfo> {
+    SessionWebUserDto login(String email, String password);
 }
