@@ -36,11 +36,19 @@ public class UserInfoController extends BaseController {
 
         try {
             SessionWebUserDto sessionWebUserDto = userInfoService.login(email, password);
+            System.out.println("sessionWebUserDto = " + sessionWebUserDto);
             session.setAttribute(Constants.SESSION_KEY, sessionWebUserDto);
             return Results.ok(sessionWebUserDto);
         } finally {
             session.removeAttribute(Constants.CHECK_CODE_KEY);
         }
     }
+
+//    @PostMapping("login")
+////    @GlobalInterceptor(checkLogin = false, checkParams = true)
+//    public Results<String> login(HttpSession session) {
+//        System.out.println("session = " + session);
+//        return Results.ok("请求成功");
+//    }
 
 }
