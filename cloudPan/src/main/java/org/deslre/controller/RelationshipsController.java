@@ -34,8 +34,7 @@ public class RelationshipsController extends BaseController {
 
     @PostMapping("updateNodeData")
     public Results<Void> updateNodeData(SingleNodeVO singleNodeVO) {
-
         System.out.println("singleNodeVO = " + singleNodeVO);
-        return Results.ok();
+        return relationshipsService.updateNodeData(singleNodeVO);
     }
 }

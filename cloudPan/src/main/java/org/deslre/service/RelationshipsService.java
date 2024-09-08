@@ -2,6 +2,7 @@ package org.deslre.service;
 
 import org.deslre.entity.po.Relationships;
 import org.deslre.entity.vo.RelationshipsVO;
+import org.deslre.entity.vo.SingleNodeVO;
 import org.deslre.result.Results;
 
 import java.util.List;
@@ -15,4 +16,6 @@ import java.util.List;
  */
 public interface RelationshipsService extends BaseService<Relationships>{
     Results<List<RelationshipsVO>> getGroupRela(Integer id);
+
+    Results<Void> updateNodeData(SingleNodeVO singleNodeVO);
 }
