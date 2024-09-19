@@ -1,15 +1,12 @@
 package org.deslre.entity.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import org.deslre.utils.DateUtils;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -29,9 +26,10 @@ public class ManageArrowsVO implements Serializable {
 
     private String arrowName;
 
-    private LocalDateTime createTime;
+    private Date createTime;
 
-    private LocalDateTime updateTime;
+    @JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
+    private Date updateTime;
 
     private Boolean exist;
 

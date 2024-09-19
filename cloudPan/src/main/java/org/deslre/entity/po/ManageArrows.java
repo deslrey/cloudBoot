@@ -1,15 +1,13 @@
 package org.deslre.entity.po;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-
-import java.io.Serial;
-import java.time.LocalDateTime;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -21,7 +19,6 @@ import lombok.experimental.Accessors;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @TableName("manage_arrows")
 public class ManageArrows implements Serializable {
 
@@ -40,14 +37,15 @@ public class ManageArrows implements Serializable {
     private String arrowName;
 
     /**
-     * 创建日期
+     * 创建时间
      */
-    private LocalDateTime createTime;
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
 
     /**
      * 修改日期
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 逻辑删除
