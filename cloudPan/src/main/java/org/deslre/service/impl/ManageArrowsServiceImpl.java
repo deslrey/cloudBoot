@@ -32,9 +32,6 @@ public class ManageArrowsServiceImpl extends BaseServiceImpl<ManageArrowsMapper,
     public Results<PageResult<ManageArrowsVO>> getPageData(ManageArrowsQuery query) {
         IPage<ManageArrows> page = baseMapper.selectPage(getPage(query), getWrapper(new ManageArrowsQuery()));
 
-        List<ManageArrows> records = page.getRecords();
-        records.forEach(System.out::println);
-
         PageResult<ManageArrowsVO> pageResult = new PageResult<>(page.getTotal(), page.getSize(), page.getPages(), ManageArrowsConvert.INSTANCE.convertList(page.getRecords()));
         return Results.ok(pageResult);
     }

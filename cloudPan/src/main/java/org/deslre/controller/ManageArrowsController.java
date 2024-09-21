@@ -41,14 +41,11 @@ public class ManageArrowsController extends BaseController {
     @PostMapping("addArrowsData")
     public Results<Void> addArrowsData(HttpSession session, String arrowName){
         String nickName = getUserInfoFromSession(session).getNickName();
-        System.out.println("arrowName = " + arrowName);
-//        return Results.ok("插入成功");
         return manageArrowsService.addArrowsData(arrowName,nickName);
     }
 
     @PostMapping("updateArrowsData")
     public Results<Void> updateArrowsData(@VerifyParam(required = true) ManageArrowsVO arrowsVO) {
-        System.out.println("arrowsVO = " + arrowsVO);
         return manageArrowsService.updateArrowsData(arrowsVO);
     }
 
