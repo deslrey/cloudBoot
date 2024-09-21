@@ -1,10 +1,7 @@
 package org.deslre.service.impl;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.deslre.convert.ManageArrowsConvert;
 import org.deslre.entity.po.ManageArrows;
 import org.deslre.entity.vo.ManageArrowsVO;
@@ -70,6 +67,28 @@ public class ManageArrowsServiceImpl extends BaseServiceImpl<ManageArrowsMapper,
             return Results.ok("修改成功");
         }
         return Results.fail("修改失败");
+    }
+
+    @Override
+    public Results<Void> addArrowsData(String arrowName, String nickName) {
+        if (StringUtil.isEmpty(arrowName)) {
+            throw new DeslreException(ResultCodeEnum.EMPTY_VALUE);
+        }
+        if (StringUtil.isEmpty(nickName)) {
+            throw new DeslreException("用户验证失败,请检查是否登录");
+        }
+
+        ManageArrows manageArrows = new ManageArrows();
+        manageArrows.setArrowName(arrowName);
+        manageArrows.setCreateUser(nickName);
+        manageArrows.setExist(true);
+
+        boolean saved = save(manageArrows);
+        if (saved) {
+            return Results.ok("添加成功");
+        }
+        return Results.fail("添加失败");
+
     }
 
 }

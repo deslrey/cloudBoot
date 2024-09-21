@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -35,6 +36,14 @@ public class ManageArrowsController extends BaseController {
     @PostMapping("getPageData")
     public Results<PageResult<ManageArrowsVO>> getPageData(@Valid ManageArrowsQuery query) {
         return manageArrowsService.getPageData(query);
+    }
+
+    @PostMapping("addArrowsData")
+    public Results<Void> addArrowsData(HttpSession session, String arrowName){
+        String nickName = getUserInfoFromSession(session).getNickName();
+        System.out.println("arrowName = " + arrowName);
+//        return Results.ok("插入成功");
+        return manageArrowsService.addArrowsData(arrowName,nickName);
     }
 
     @PostMapping("updateArrowsData")

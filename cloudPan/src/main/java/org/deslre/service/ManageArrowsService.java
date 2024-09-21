@@ -1,13 +1,10 @@
 package org.deslre.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import org.deslre.entity.po.ManageArrows;
 import org.deslre.entity.vo.ManageArrowsVO;
 import org.deslre.page.PageResult;
 import org.deslre.query.ManageArrowsQuery;
 import org.deslre.result.Results;
-
-import java.util.List;
 
 /**
  * <p>
@@ -22,4 +19,6 @@ public interface ManageArrowsService extends BaseService<ManageArrows> {
     Results<PageResult<ManageArrowsVO>> getPageData(ManageArrowsQuery query);
 
     Results<Void> updateArrowsData(ManageArrowsVO arrowsVO);
+
+    Results<Void> addArrowsData(String arrowName, String nickName);
 }
