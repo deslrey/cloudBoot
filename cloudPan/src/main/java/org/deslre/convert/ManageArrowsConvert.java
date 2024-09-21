@@ -20,6 +20,8 @@ public interface ManageArrowsConvert {
     ManageArrowsConvert INSTANCE = Mappers.getMapper(ManageArrowsConvert.class);
     ManageArrows convert(ManageArrowsVO vo);
 
+    ManageArrows convent(ManageArrows entity);
+
     ManageArrowsVO convert(ManageArrows entity);
 
     List<ManageArrowsVO> convertList(List<ManageArrows> list);

@@ -31,9 +31,10 @@ public class ManageArrowsVO implements Serializable {
     @JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
     private Date updateTime;
 
+    private String createUser;
+
     private Boolean exist;
 
-    private String createUser;
 
 
 }

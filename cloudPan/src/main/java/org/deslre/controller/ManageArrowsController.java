@@ -1,6 +1,7 @@
 package org.deslre.controller;
 
 
+import org.deslre.annotation.VerifyParam;
 import org.deslre.entity.po.ManageArrows;
 import org.deslre.entity.vo.ManageArrowsVO;
 import org.deslre.page.PageResult;
@@ -18,7 +19,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author author
@@ -32,8 +33,14 @@ public class ManageArrowsController extends BaseController {
     private ManageArrowsService manageArrowsService;
 
     @PostMapping("getPageData")
-    public Results<PageResult<ManageArrowsVO>> getPageData(@Valid ManageArrowsQuery query){
+    public Results<PageResult<ManageArrowsVO>> getPageData(@Valid ManageArrowsQuery query) {
         return manageArrowsService.getPageData(query);
+    }
+
+    @PostMapping("updateArrowsData")
+    public Results<Void> updateArrowsData(@VerifyParam(required = true) ManageArrowsVO arrowsVO) {
+        System.out.println("arrowsVO = " + arrowsVO);
+        return manageArrowsService.updateArrowsData(arrowsVO);
     }
 
 }

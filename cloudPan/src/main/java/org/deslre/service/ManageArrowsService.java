@@ -20,4 +20,6 @@ import java.util.List;
 public interface ManageArrowsService extends BaseService<ManageArrows> {
 
     Results<PageResult<ManageArrowsVO>> getPageData(ManageArrowsQuery query);
+
+    Results<Void> updateArrowsData(ManageArrowsVO arrowsVO);
 }
