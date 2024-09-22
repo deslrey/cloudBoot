@@ -88,4 +88,30 @@ public class ManageArrowsServiceImpl extends BaseServiceImpl<ManageArrowsMapper,
 
     }
 
+    @Override
+    public Results<Void> deleteArrowsData(ManageArrowsVO arrowsVO) {
+        if (StringUtil.isNull(arrowsVO)) {
+            throw new DeslreException(ResultCodeEnum.CODE_500);
+        }
+        if (StringUtil.isNull(arrowsVO.getId()) || arrowsVO.getId() < 1) {
+            throw new DeslreException(ResultCodeEnum.CODE_500);
+        }
+        if (StringUtil.isEmpty(arrowsVO.getArrowName())) {
+            throw new DeslreException(ResultCodeEnum.CODE_500);
+        }
+        ManageArrows manageArrows = getById(arrowsVO);
+        if (manageArrows == null) {
+            throw new DeslreException(ResultCodeEnum.CODE_600);
+        }
+        if (!arrowsVO.getArrowName().equals(manageArrows.getArrowName())) {
+            throw new DeslreException(ResultCodeEnum.CODE_500);
+        }
+        manageArrows.setExist(false);
+        boolean updated = updateById(manageArrows);
+        if (updated) {
+            return Results.ok("删除成功");
+        }
+        return Results.fail("删除失败");
+    }
+
 }

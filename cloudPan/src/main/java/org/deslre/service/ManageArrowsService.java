@@ -21,4 +21,6 @@ public interface ManageArrowsService extends BaseService<ManageArrows> {
     Results<Void> updateArrowsData(ManageArrowsVO arrowsVO);
 
     Results<Void> addArrowsData(String arrowName, String nickName);
+
+    Results<Void> deleteArrowsData(ManageArrowsVO arrowsVO);
 }

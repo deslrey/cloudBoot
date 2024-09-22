@@ -39,14 +39,19 @@ public class ManageArrowsController extends BaseController {
     }
 
     @PostMapping("addArrowsData")
-    public Results<Void> addArrowsData(HttpSession session, String arrowName){
+    public Results<Void> addArrowsData(HttpSession session, String arrowName) {
         String nickName = getUserInfoFromSession(session).getNickName();
-        return manageArrowsService.addArrowsData(arrowName,nickName);
+        return manageArrowsService.addArrowsData(arrowName, nickName);
     }
 
     @PostMapping("updateArrowsData")
     public Results<Void> updateArrowsData(@VerifyParam(required = true) ManageArrowsVO arrowsVO) {
         return manageArrowsService.updateArrowsData(arrowsVO);
+    }
+
+    @PostMapping("deleteArrowsData")
+    public Results<Void> deleteArrowsData(ManageArrowsVO vo) {
+        return manageArrowsService.deleteArrowsData(vo);
     }
 
 }
