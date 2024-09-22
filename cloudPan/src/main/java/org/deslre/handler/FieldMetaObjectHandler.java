@@ -14,16 +14,19 @@ import java.util.Date;
  */
 public class FieldMetaObjectHandler implements MetaObjectHandler {
     private final static String CREATE_TIME = "createTime";
+    private final static String UPDATE_TIME = "updateTime";
 
     @Override
     public void insertFill(MetaObject metaObject) {
         // 创建时间
         strictInsertFill(metaObject, CREATE_TIME, Date.class, new Date());
+        strictInsertFill(metaObject, UPDATE_TIME, Date.class, new Date());
 
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-
+        // 更新时自动填充 updateTime
+        this.setFieldValByName("updateTime", new Date(), metaObject);
     }
 }
