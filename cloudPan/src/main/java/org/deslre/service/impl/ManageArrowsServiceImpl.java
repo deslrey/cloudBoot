@@ -1,6 +1,7 @@
 package org.deslre.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.deslre.convert.ManageArrowsConvert;
 import org.deslre.entity.po.ManageArrows;
@@ -30,7 +31,7 @@ public class ManageArrowsServiceImpl extends BaseServiceImpl<ManageArrowsMapper,
 
     @Override
     public Results<PageResult<ManageArrowsVO>> getPageData(ManageArrowsQuery query) {
-        IPage<ManageArrows> page = baseMapper.selectPage(getPage(query), getWrapper(new ManageArrowsQuery()));
+        IPage<ManageArrows> page = baseMapper.selectPage(getPage(query), new QueryWrapper<ManageArrows>().eq("exist",true));
 
         PageResult<ManageArrowsVO> pageResult = new PageResult<>(page.getTotal(), page.getSize(), page.getPages(), ManageArrowsConvert.INSTANCE.convertList(page.getRecords()));
         return Results.ok(pageResult);
