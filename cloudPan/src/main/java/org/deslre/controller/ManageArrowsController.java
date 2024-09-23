@@ -2,6 +2,7 @@ package org.deslre.controller;
 
 
 import org.deslre.annotation.VerifyParam;
+import org.deslre.entity.dto.SessionWebUserDto;
 import org.deslre.entity.po.ManageArrows;
 import org.deslre.entity.vo.ManageArrowsVO;
 import org.deslre.page.PageResult;
@@ -52,6 +53,12 @@ public class ManageArrowsController extends BaseController {
     @PostMapping("deleteArrowsData")
     public Results<Void> deleteArrowsData(ManageArrowsVO vo) {
         return manageArrowsService.deleteArrowsData(vo);
+    }
+
+    @PostMapping("getArrowsList")
+    public Results<List<String>> getArrowsList(HttpSession session) {
+        SessionWebUserDto userDto = getUserInfoFromSession(session);
+        return manageArrowsService.getArrowsList(userDto);
     }
 
 }

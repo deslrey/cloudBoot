@@ -4,6 +4,7 @@ package org.deslre.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.deslre.convert.ManageArrowsConvert;
+import org.deslre.entity.dto.SessionWebUserDto;
 import org.deslre.entity.po.ManageArrows;
 import org.deslre.entity.vo.ManageArrowsVO;
 import org.deslre.exception.DeslreException;
@@ -16,6 +17,7 @@ import org.deslre.service.ManageArrowsService;
 import org.deslre.utils.StringUtil;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +33,7 @@ public class ManageArrowsServiceImpl extends BaseServiceImpl<ManageArrowsMapper,
 
     @Override
     public Results<PageResult<ManageArrowsVO>> getPageData(ManageArrowsQuery query) {
-        IPage<ManageArrows> page = baseMapper.selectPage(getPage(query), new QueryWrapper<ManageArrows>().eq("exist",true));
+        IPage<ManageArrows> page = baseMapper.selectPage(getPage(query), new QueryWrapper<ManageArrows>().eq("exist", true));
 
         PageResult<ManageArrowsVO> pageResult = new PageResult<>(page.getTotal(), page.getSize(), page.getPages(), ManageArrowsConvert.INSTANCE.convertList(page.getRecords()));
         return Results.ok(pageResult);
@@ -113,6 +115,24 @@ public class ManageArrowsServiceImpl extends BaseServiceImpl<ManageArrowsMapper,
             return Results.ok("删除成功");
         }
         return Results.fail("删除失败");
+    }
+
+    @Override
+    public Results<List<String>> getArrowsList(SessionWebUserDto userDto) {
+        if (StringUtil.isNull(userDto) || StringUtil.isEmpty(userDto.getNickName())) {
+            throw new DeslreException(ResultCodeEnum.LOGIN_AUTH);
+        }
+        QueryWrapper<ManageArrows> queryWrapper = new QueryWrapper<ManageArrows>().eq("exist", true);
+        List<ManageArrows> arrowsList = list(queryWrapper);
+        List<String> arrowsData = new ArrayList<>(15);
+        if (arrowsList == null || arrowsList.isEmpty()) {
+            return Results.ok(arrowsData);
+        }
+        for (ManageArrows arrows : arrowsList) {
+            arrowsData.add(arrows.getArrowName());
+        }
+
+        return Results.ok(arrowsData);
     }
 
 }
