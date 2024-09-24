@@ -86,8 +86,8 @@ public class FileInfoServiceImpl extends BaseServiceImpl<FileInfoMapper, FileInf
         wrapper.eq(StringUtil.isNotEmpty(query.getFilePid()), "file_pid", query.getFilePid());
         wrapper.eq(StringUtil.isNotEmpty(query.getFileName()), "file_name", query.getFileName());
         wrapper.eq(StringUtil.isNotEmpty(query.getFileMd5()), "file_md5", query.getFileMd5());
-        wrapper.in(query.getFileIdArray() != null, "file_id", (Object) query.getFileIdArray());
-        wrapper.notIn(query.getExcludeFileIdArray() != null, "file_id", (Object) query.getExcludeFileIdArray());
+        wrapper.in(query.getFileIdArray() != null, "file_id", query.getFileIdArray());
+        wrapper.notIn(query.getExcludeFileIdArray() != null, "file_id", query.getExcludeFileIdArray());
         wrapper.eq(query.getFileType() != null, "file_type", query.getFileType());
         wrapper.eq(query.getFolderType() != null, "folder_type", query.getFolderType());
         wrapper.eq(query.getDelFlag() != null, "del_flag", query.getDelFlag());
