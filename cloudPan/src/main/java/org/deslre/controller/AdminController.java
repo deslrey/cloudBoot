@@ -119,4 +119,12 @@ public class AdminController extends BaseController {
         }
         return Results.ok();
     }
+
+    @PostMapping("updateUserStatus")
+    @GlobalInterceptor(checkParams = true, checkAdmin = true)
+    public Results<Void> updateUserStatus(@VerifyParam(required = true) String userId,
+                                       @VerifyParam(required = true) Integer status) {
+        return userInfoService.updateUserStatus(userId,status);
+    }
+
 }

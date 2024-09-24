@@ -19,7 +19,7 @@ public enum UserStatusEnum {
 
     private final Integer status;
     @Setter
-    private final String desc;
+    private String desc;
 
     UserStatusEnum(Integer status, String desc) {
         this.status = status;

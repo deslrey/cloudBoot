@@ -33,4 +33,6 @@ public interface UserInfoService extends BaseService<UserInfo> {
     void resetPwd(String email, String password, String emailCode);
 
     Results<PageResult<UserInfoVO>> loadUserList(UserInfoQuery userInfoQuery);
+
+    Results<Void> updateUserStatus(String userId, Integer status);
 }

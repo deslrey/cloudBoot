@@ -10,6 +10,7 @@ import org.deslre.convert.UserInfoConvert;
 import org.deslre.entity.dto.SessionWebUserDto;
 import org.deslre.entity.dto.UserSpaceDto;
 import org.deslre.entity.enums.UserStatusEnum;
+import org.deslre.entity.po.FileInfo;
 import org.deslre.entity.po.UserInfo;
 import org.deslre.entity.vo.UserInfoVO;
 import org.deslre.exception.DeslreException;
@@ -18,6 +19,7 @@ import org.deslre.mapper.UserInfoMapper;
 import org.deslre.page.PageResult;
 import org.deslre.query.UserInfoQuery;
 import org.deslre.result.Constants;
+import org.deslre.result.ResultCodeEnum;
 import org.deslre.result.Results;
 import org.deslre.service.EmailCodeService;
 import org.deslre.service.UserInfoService;
@@ -168,5 +170,32 @@ public class UserInfoServiceImpl extends BaseServiceImpl<UserInfoMapper, UserInf
 
         PageResult<UserInfoVO> pageResult = new PageResult<>(page.getTotal(), page.getSize(), page.getCurrent(), page.getPages(), UserInfoConvert.INSTANCE.convertList(page.getRecords()));
         return Results.ok(pageResult);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Results<Void> updateUserStatus(String userId, Integer status) {
+        if (StringUtil.isEmpty(userId)) {
+            throw new DeslreException(ResultCodeEnum.CODE_600);
+        }
+        if (StringUtil.isNull(status) || !(status == 0 || status == 1)) {
+            throw new DeslreException(ResultCodeEnum.CODE_600);
+        }
+        UserInfo userInfo = getById(userId);
+        if (userInfo == null) {
+            throw new DeslreException(ResultCodeEnum.ACCOUNT_ERROR);
+        }
+        if (ArrayUtils.contains(appConfig.getAdminEmails().split(","), userInfo.getEmail())) {
+            throw new DeslreException("不可更改管理员状态");
+        }
+        if (UserStatusEnum.DISABLE.getStatus().equals(status)) {
+            userInfo.setUseSpace(0L);
+            userInfo.setStatus(status);
+            QueryWrapper<FileInfo> queryWrapper = new QueryWrapper<FileInfo>().eq("user_id", userId);
+            fileInfoMapper.delete(queryWrapper);
+        }
+        updateById(userInfo);
+
+        return Results.ok();
     }
 }
