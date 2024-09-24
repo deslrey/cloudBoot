@@ -20,6 +20,7 @@ import org.deslre.page.PageResult;
 import org.deslre.query.FileInfoQuery;
 import org.deslre.result.Constants;
 import org.deslre.result.ResultCodeEnum;
+import org.deslre.result.Results;
 import org.deslre.service.FileInfoService;
 import org.deslre.utils.*;
 import org.slf4j.Logger;
@@ -535,6 +536,32 @@ public class FileInfoServiceImpl extends BaseServiceImpl<FileInfoMapper, FileInf
         }
 //        System.out.println(copyFileList.size());
         this.saveBatch(copyFileList);
+    }
+
+    @Override
+    public Results<PageResult<FileInfoVO>> loadFileList(FileInfoQuery query) {
+        IPage<FileInfo> page = baseMapper.selectPage(getPage(query), getWrapper(query));
+        List<UserInfo> userInfoList = userInfoMapper.selectList(null);
+        Map<String, String> nameMap = new HashMap<>(16);
+        String userName;
+        for (UserInfo userInfo : userInfoList) {
+            if (StringUtil.isEmpty(userInfo.getNickName()) || StringUtil.isEmpty(userInfo.getUserId())) {
+                continue;
+            }
+            userName = nameMap.get(userInfo.getUserId());
+            if (StringUtil.isEmpty(userName)) {
+                nameMap.put(userInfo.getUserId(), userInfo.getNickName());
+            }
+        }
+        List<FileInfoVO> convertedList = FileInfoConvert.INSTANCE.convertList(page.getRecords());
+        convertedList.forEach(info -> {
+            if (StringUtil.isNotEmpty(info.getUserId())) {
+                String name = nameMap.get(info.getUserId());
+                info.setNickName(name);
+            }
+        });
+        PageResult<FileInfoVO> result = new PageResult<>(page.getTotal(), page.getSize(), page.getCurrent(), page.getPages(), convertedList);
+        return Results.ok(result);
     }
 
     private void findAllSubFile(List<FileInfo> copyFileList, FileInfo fileInfo, String sourceUserId,

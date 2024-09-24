@@ -6,6 +6,7 @@ import org.deslre.entity.dto.SysSettingDto;
 import org.deslre.entity.vo.FileInfoVO;
 import org.deslre.entity.vo.UserInfoVO;
 import org.deslre.page.PageResult;
+import org.deslre.query.FileInfoQuery;
 import org.deslre.query.UserInfoQuery;
 import org.deslre.result.Results;
 import org.deslre.service.FileInfoService;
@@ -62,8 +63,8 @@ public class AdminController extends BaseController {
     }
 
     @PostMapping("loadUserList")
-    @GlobalInterceptor( checkAdmin = true, checkParams = true)
-    public Results<PageResult<UserInfoVO>> loadUserList(UserInfoQuery userInfoQuery){
+    @GlobalInterceptor(checkAdmin = true, checkParams = true)
+    public Results<PageResult<UserInfoVO>> loadUserList(UserInfoQuery userInfoQuery) {
         return userInfoService.loadUserList(userInfoQuery);
     }
 
@@ -123,8 +124,17 @@ public class AdminController extends BaseController {
     @PostMapping("updateUserStatus")
     @GlobalInterceptor(checkParams = true, checkAdmin = true)
     public Results<Void> updateUserStatus(@VerifyParam(required = true) String userId,
-                                       @VerifyParam(required = true) Integer status) {
-        return userInfoService.updateUserStatus(userId,status);
+                                          @VerifyParam(required = true) Integer status) {
+        return userInfoService.updateUserStatus(userId, status);
+    }
+
+    @PostMapping("loadFileList")
+    @GlobalInterceptor(checkParams = true, checkAdmin = true)
+    public Results<PageResult<FileInfoVO>> loadFileList(FileInfoQuery query) {
+        System.out.println("query = " + query);
+        query.setOrderBy("last_update_time desc");
+        query.setQueryNickName(true);
+        return fileInfoService.loadFileList(query);
     }
 
 }

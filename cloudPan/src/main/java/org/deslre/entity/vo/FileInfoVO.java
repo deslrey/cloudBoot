@@ -27,6 +27,8 @@ public class FileInfoVO implements Serializable {
     //	@Schema(description = "父级Id")
     private String filePid;
 
+    private String userId;
+
     //	@Schema(description = "文件大小")
     private Long fileSize;
 
@@ -35,6 +37,7 @@ public class FileInfoVO implements Serializable {
 
     //	@Schema(description = "文件封面")
     private String fileCover;
+
 
 
     //	@Schema(description = "最后更新时间")
@@ -52,5 +55,8 @@ public class FileInfoVO implements Serializable {
 
     //	@Schema(description = "0:转码中 1:转码失败 2:转码成功")
     private Integer status;
+
+    private String nickName;
+
 
 }

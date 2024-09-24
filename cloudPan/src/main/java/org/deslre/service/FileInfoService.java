@@ -6,6 +6,7 @@ import org.deslre.entity.po.FileInfo;
 import org.deslre.entity.vo.FileInfoVO;
 import org.deslre.page.PageResult;
 import org.deslre.query.FileInfoQuery;
+import org.deslre.result.Results;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -44,4 +45,6 @@ public interface FileInfoService  extends BaseService<FileInfo>{
     void delFileBatch(String userId, String fileIds, boolean b);
 
     void saveShare(String shareRootFilePid, String shareFileIds, String myFolderId, String shareUserId, String currentUserId);
+
+    Results<PageResult<FileInfoVO>> loadFileList(FileInfoQuery query);
 }
