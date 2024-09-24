@@ -3,7 +3,9 @@ package org.deslre.utils;
 import org.deslre.entity.dto.DownloadFileDto;
 import org.deslre.entity.dto.SysSettingDto;
 import org.deslre.entity.dto.UserSpaceDto;
+import org.deslre.entity.po.UserInfo;
 import org.deslre.mapper.FileInfoMapper;
+import org.deslre.mapper.UserInfoMapper;
 import org.deslre.result.Constants;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +25,8 @@ public class RedisComponent {
 
     @Resource
     private FileInfoMapper fileInfoMapper;
+    @Resource
+    private UserInfoMapper userInfoMapper;
 
 
     public SysSettingDto getSysSettingDto() {
@@ -38,6 +42,9 @@ public class RedisComponent {
 
     public void saveUserUseSpace(String userId, UserSpaceDto userSpaceDto) {
         redisUtils.setex(Constants.REDIS_KEY_USER_SPACE_USE + userId, userSpaceDto, Constants.REDIS_KEY_EXPIRES_DAY);
+    }
+    public void saveSysSettingsDto(SysSettingDto sysSettingsDto) {
+        redisUtils.set(Constants.REDIS_KEY_SYS_SETTING, sysSettingsDto);
     }
 
     public UserSpaceDto getUserUseSpace(String userId) {
@@ -85,4 +92,5 @@ public class RedisComponent {
     public DownloadFileDto getDownloadCode(String code) {
         return (DownloadFileDto) redisUtils.get(Constants.REDIS_KEY_DOWNLOAD + code);
     }
+
 }

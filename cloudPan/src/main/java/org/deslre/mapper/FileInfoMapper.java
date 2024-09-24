@@ -31,4 +31,6 @@ public interface FileInfoMapper extends BaseDao<FileInfo> {
                       @Param("filePidList") List<String> filePidList,
                       @Param("fileIdList") List<String> fileIdList,
                       @Param("oldDelFlag") Integer oldDelFlag);
+
+
 }

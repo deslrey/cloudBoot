@@ -160,5 +160,4 @@ public class UserInfoServiceImpl extends BaseServiceImpl<UserInfoMapper, UserInf
         userInfo.setPassword(StringUtil.encodeByMd5(password));
         this.updateById(userInfo);
     }
-
 }

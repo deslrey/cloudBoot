@@ -44,5 +44,4 @@ public interface FileInfoService  extends BaseService<FileInfo>{
     void delFileBatch(String userId, String fileIds, boolean b);
 
     void saveShare(String shareRootFilePid, String shareFileIds, String myFolderId, String shareUserId, String currentUserId);
-
 }

@@ -13,4 +13,5 @@ import org.deslre.entity.po.UserInfo;
 public interface UserInfoMapper extends BaseDao<UserInfo> {
 
     Integer updateUseSpace(@Param("userId") String userId, @Param("useSpace") Long useSpace, @Param("totalSpace") Long totalSpace);
+
 }
