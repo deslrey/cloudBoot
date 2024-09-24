@@ -188,9 +188,9 @@ public class UserInfoServiceImpl extends BaseServiceImpl<UserInfoMapper, UserInf
         if (ArrayUtils.contains(appConfig.getAdminEmails().split(","), userInfo.getEmail())) {
             throw new DeslreException("不可更改管理员状态");
         }
+        userInfo.setStatus(status);
         if (UserStatusEnum.DISABLE.getStatus().equals(status)) {
             userInfo.setUseSpace(0L);
-            userInfo.setStatus(status);
             QueryWrapper<FileInfo> queryWrapper = new QueryWrapper<FileInfo>().eq("user_id", userId);
             fileInfoMapper.delete(queryWrapper);
         }
