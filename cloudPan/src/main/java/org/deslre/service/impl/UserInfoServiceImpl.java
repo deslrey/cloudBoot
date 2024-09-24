@@ -194,8 +194,11 @@ public class UserInfoServiceImpl extends BaseServiceImpl<UserInfoMapper, UserInf
             QueryWrapper<FileInfo> queryWrapper = new QueryWrapper<FileInfo>().eq("user_id", userId);
             fileInfoMapper.delete(queryWrapper);
         }
-        updateById(userInfo);
+        boolean updated = updateById(userInfo);
+        if (updated) {
+            return Results.ok(status == 0 ? "禁用成功" : "启用成功");
+        }
+        return Results.fail(status == 0 ? "禁用失败" : "启用失败");
 
-        return Results.ok();
     }
 }
