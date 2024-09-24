@@ -31,7 +31,9 @@ import java.util.List;
  */
 @Service
 public class GroupsServiceImpl extends BaseServiceImpl<GroupsMapper, Groups> implements GroupsService {
+
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Results<PageResult<GroupsVO>> getAllGroups(GroupsQuery query) {
         IPage<Groups> page = baseMapper.selectPage(getPage(query), getWrapper(new GroupsQuery()));
         PageResult<GroupsVO> pageResult = new PageResult<>(page.getTotal(), page.getSize(), page.getCurrent(), page.getPages(), GroupsConvert.INSTANCE.convertList(page.getRecords()));
@@ -79,6 +81,7 @@ public class GroupsServiceImpl extends BaseServiceImpl<GroupsMapper, Groups> imp
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Results<List<GroupsVO>> getOptions(Integer count) {
         QueryWrapper<Groups> queryWrapper = new QueryWrapper<>();
         queryWrapper.orderByDesc("id").last("LIMIT 100");

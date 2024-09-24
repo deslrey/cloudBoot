@@ -21,6 +21,7 @@ import org.deslre.service.PersonsService;
 import org.deslre.service.RelationshipsService;
 import org.deslre.utils.StringUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -48,6 +49,7 @@ public class RelationshipsServiceImpl extends BaseServiceImpl<RelationshipsMappe
     private EntitiesService entitiesService;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Results<List<RelationshipsVO>> getGroupRela(Integer id) {
         if (id <= 0) {
             throw new DeslreException(ResultCodeEnum.CODE_600);
@@ -67,6 +69,7 @@ public class RelationshipsServiceImpl extends BaseServiceImpl<RelationshipsMappe
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Results<Void> updateNodeData(SingleNodeVO singleNodeVO) {
         if (StringUtil.isNull(singleNodeVO)) {
             throw new DeslreException(ResultCodeEnum.CODE_600);

@@ -16,6 +16,7 @@ import org.deslre.service.GroupMembersService;
 import org.deslre.service.PersonsService;
 import org.deslre.utils.StringUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -42,12 +43,14 @@ public class GroupMembersServiceImpl extends BaseServiceImpl<GroupMembersMapper,
     private EntitiesService entitiesService;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Results<Void> updateNodeData(SingleNodeVO singleNode) {
-        String role = singleNode.getRole();
+
         if (StringUtil.isNull(singleNode) || StringUtil.isNull(singleNode.getId())
                 || StringUtil.isNull(singleNode.getGroupId()) || StringUtil.isEmpty(singleNode.getNodeType())) {
             throw new DeslreException(ResultCodeEnum.EMPTY_VALUE);
         }
+        String role = singleNode.getRole();
 
         if (singleNode.getId() <= 0 || singleNode.getGroupId() <= 0) {
             throw new DeslreException(ResultCodeEnum.CODE_600);
@@ -81,6 +84,7 @@ public class GroupMembersServiceImpl extends BaseServiceImpl<GroupMembersMapper,
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Results<Map<String, List<SingleNodeVO>>> getAllData(Integer id) {
         if (StringUtil.isNull(id) || id <= 0) {
             throw new DeslreException(ResultCodeEnum.CODE_600);

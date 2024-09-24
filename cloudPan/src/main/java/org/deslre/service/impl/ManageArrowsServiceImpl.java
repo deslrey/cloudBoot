@@ -16,6 +16,7 @@ import org.deslre.result.Results;
 import org.deslre.service.ManageArrowsService;
 import org.deslre.utils.StringUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,7 @@ import java.util.List;
 public class ManageArrowsServiceImpl extends BaseServiceImpl<ManageArrowsMapper, ManageArrows> implements ManageArrowsService {
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Results<PageResult<ManageArrowsVO>> getPageData(ManageArrowsQuery query) {
         IPage<ManageArrows> page = baseMapper.selectPage(getPage(query), new QueryWrapper<ManageArrows>().eq("exist", true));
 
@@ -40,6 +42,7 @@ public class ManageArrowsServiceImpl extends BaseServiceImpl<ManageArrowsMapper,
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Results<Void> updateArrowsData(ManageArrowsVO arrowsVO) {
         if (StringUtil.isNull(arrowsVO)) {
             throw new DeslreException(ResultCodeEnum.DATA_ERROR);
@@ -70,6 +73,7 @@ public class ManageArrowsServiceImpl extends BaseServiceImpl<ManageArrowsMapper,
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Results<Void> addArrowsData(String arrowName, String nickName) {
         if (StringUtil.isEmpty(arrowName)) {
             throw new DeslreException(ResultCodeEnum.EMPTY_VALUE);
@@ -92,6 +96,7 @@ public class ManageArrowsServiceImpl extends BaseServiceImpl<ManageArrowsMapper,
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Results<Void> deleteArrowsData(ManageArrowsVO arrowsVO) {
         if (StringUtil.isNull(arrowsVO)) {
             throw new DeslreException(ResultCodeEnum.CODE_500);
@@ -118,6 +123,7 @@ public class ManageArrowsServiceImpl extends BaseServiceImpl<ManageArrowsMapper,
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Results<List<String>> getArrowsList(SessionWebUserDto userDto) {
         if (StringUtil.isNull(userDto) || StringUtil.isEmpty(userDto.getNickName())) {
             throw new DeslreException(ResultCodeEnum.LOGIN_AUTH);

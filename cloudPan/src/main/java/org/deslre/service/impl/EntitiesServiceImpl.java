@@ -15,6 +15,7 @@ import org.deslre.service.EntitiesService;
 import org.deslre.service.GroupMembersService;
 import org.deslre.utils.StringUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -32,6 +33,7 @@ public class EntitiesServiceImpl extends BaseServiceImpl<EntitiesMapper, Entitie
     private GroupMembersService groupMembersService;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Results<Void> updateEntities(EntitiesVO entitiesVO, Integer groupId) {
 
         if (StringUtil.isNull(entitiesVO) || StringUtil.isNull(groupId)) {

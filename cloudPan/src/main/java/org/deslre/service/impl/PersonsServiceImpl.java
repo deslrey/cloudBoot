@@ -15,6 +15,7 @@ import org.deslre.service.GroupsService;
 import org.deslre.service.PersonsService;
 import org.deslre.utils.StringUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -32,6 +33,7 @@ public class PersonsServiceImpl extends BaseServiceImpl<PersonsMapper, Persons> 
     private GroupMembersService groupMembersService;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Results<Void> updatePerson(PersonsVO personsVO, Integer groupId) {
 
         if (StringUtil.isNull(personsVO) || StringUtil.isNull(groupId)) {
