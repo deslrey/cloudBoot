@@ -5,6 +5,7 @@ import org.deslre.entity.po.UserInfo;
 import org.deslre.entity.vo.UserInfoVO;
 import org.deslre.page.PageResult;
 import org.deslre.query.UserInfoQuery;
+import org.deslre.result.Results;
 
 import java.util.List;
 
@@ -30,4 +31,6 @@ public interface UserInfoService extends BaseService<UserInfo> {
     SessionWebUserDto login(String email, String password);
 
     void resetPwd(String email, String password, String emailCode);
+
+    Results<PageResult<UserInfoVO>> loadUserList(UserInfoQuery userInfoQuery);
 }

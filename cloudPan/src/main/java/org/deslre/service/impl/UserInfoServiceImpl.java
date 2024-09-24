@@ -18,6 +18,7 @@ import org.deslre.mapper.UserInfoMapper;
 import org.deslre.page.PageResult;
 import org.deslre.query.UserInfoQuery;
 import org.deslre.result.Constants;
+import org.deslre.result.Results;
 import org.deslre.service.EmailCodeService;
 import org.deslre.service.UserInfoService;
 import org.deslre.utils.RedisComponent;
@@ -56,7 +57,7 @@ public class UserInfoServiceImpl extends BaseServiceImpl<UserInfoMapper, UserInf
     public PageResult<UserInfoVO> page(UserInfoQuery query) {
         IPage<UserInfo> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 
-        return new PageResult<>(page.getTotal(), page.getSize(), page.getCurrent(),page.getPages(), UserInfoConvert.INSTANCE.convertList(page.getRecords()));
+        return new PageResult<>(page.getTotal(), page.getSize(), page.getCurrent(), page.getPages(), UserInfoConvert.INSTANCE.convertList(page.getRecords()));
     }
 
     private QueryWrapper<UserInfo> getWrapper(UserInfoQuery query) {
@@ -159,5 +160,13 @@ public class UserInfoServiceImpl extends BaseServiceImpl<UserInfoMapper, UserInf
 
         userInfo.setPassword(StringUtil.encodeByMd5(password));
         this.updateById(userInfo);
+    }
+
+    @Override
+    public Results<PageResult<UserInfoVO>> loadUserList(UserInfoQuery userInfoQuery) {
+        IPage<UserInfo> page = baseMapper.selectPage(getPage(userInfoQuery), getWrapper(userInfoQuery));
+
+        PageResult<UserInfoVO> pageResult = new PageResult<>(page.getTotal(), page.getSize(), page.getCurrent(), page.getPages(), UserInfoConvert.INSTANCE.convertList(page.getRecords()));
+        return Results.ok(pageResult);
     }
 }

@@ -4,6 +4,9 @@ import org.deslre.annotation.GlobalInterceptor;
 import org.deslre.annotation.VerifyParam;
 import org.deslre.entity.dto.SysSettingDto;
 import org.deslre.entity.vo.FileInfoVO;
+import org.deslre.entity.vo.UserInfoVO;
+import org.deslre.page.PageResult;
+import org.deslre.query.UserInfoQuery;
 import org.deslre.result.Results;
 import org.deslre.service.FileInfoService;
 import org.deslre.service.UserInfoService;
@@ -58,6 +61,11 @@ public class AdminController extends BaseController {
         return Results.ok(null);
     }
 
+    @PostMapping("loadUserList")
+    @GlobalInterceptor( checkAdmin = true, checkParams = true)
+    public Results<PageResult<UserInfoVO>> loadUserList(UserInfoQuery userInfoQuery){
+        return userInfoService.loadUserList(userInfoQuery);
+    }
 
     @PostMapping("/getFolderInfo")
     @GlobalInterceptor(checkLogin = false, checkAdmin = true, checkParams = true)
