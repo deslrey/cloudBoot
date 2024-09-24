@@ -201,4 +201,26 @@ public class UserInfoServiceImpl extends BaseServiceImpl<UserInfoMapper, UserInf
         return Results.fail(status == 0 ? "禁用失败" : "启用失败");
 
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Results<Void> updateUserSpace(String userId, Integer changeSpace) {
+        if (StringUtil.isEmpty(userId)) {
+            throw new DeslreException(ResultCodeEnum.CODE_500);
+        }
+        if (StringUtil.isNull(changeSpace) || changeSpace < 0) {
+            throw new DeslreException("设置的空间大小不能为空或者为负数");
+        }
+        UserInfo userInfo = getById(userId);
+        if (userInfo == null) {
+            throw new DeslreException("操作用户不存在");
+        }
+        Long space = changeSpace * Constants.MB;
+        userInfo.setTotalSpace(space);
+        boolean updated = updateById(userInfo);
+        if (updated) {
+            return Results.ok("操作成功");
+        }
+        return Results.fail("操作失败");
+    }
 }

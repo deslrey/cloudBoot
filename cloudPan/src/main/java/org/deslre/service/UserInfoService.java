@@ -35,4 +35,6 @@ public interface UserInfoService extends BaseService<UserInfo> {
     Results<PageResult<UserInfoVO>> loadUserList(UserInfoQuery userInfoQuery);
 
     Results<Void> updateUserStatus(String userId, Integer status);
+
+    Results<Void> updateUserSpace(String userId, Integer changeSpace);
 }

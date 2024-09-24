@@ -12,6 +12,7 @@ import org.deslre.result.Results;
 import org.deslre.service.FileInfoService;
 import org.deslre.service.UserInfoService;
 import org.deslre.utils.RedisComponent;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -135,6 +136,12 @@ public class AdminController extends BaseController {
         query.setOrderBy("last_update_time desc");
         query.setQueryNickName(true);
         return fileInfoService.loadFileList(query);
+    }
+
+    @PostMapping("updateUserSpace")
+    @GlobalInterceptor(checkParams = true, checkAdmin = true)
+    public Results<Void> updateUserSpace(@VerifyParam(required = true) String userId, @VerifyParam(required = true) Integer changeSpace) {
+        return userInfoService.updateUserSpace(userId, changeSpace);
     }
 
 }
